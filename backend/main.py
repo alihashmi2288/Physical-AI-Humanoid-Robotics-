@@ -111,9 +111,7 @@ for Physical AI and Robotics. Focus on papers from 2024-2025. Format as markdown
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-# For Vercel serverless
-handler = app
-
+# For Vercel serverless - export the app directly
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
