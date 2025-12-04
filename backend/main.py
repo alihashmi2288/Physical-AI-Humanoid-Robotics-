@@ -54,7 +54,6 @@ async def ingest(request: IngestRequest):
 async def chat(request: ChatRequest):
     """Main chat endpoint with RAG"""
     try:
-        init_qdrant()
         user_message = request.history[-1].content
         
         # Search relevant documents

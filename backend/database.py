@@ -20,16 +20,23 @@ def get_qdrant_client():
         )
     return _qdrant_client
 
+_qdrant_initialized = False
+
 def init_qdrant():
     """Initialize Qdrant collection if not exists"""
+    global _qdrant_initialized
+    if _qdrant_initialized:
+        return
     client = get_qdrant_client()
     try:
         client.get_collection(COLLECTION_NAME)
+        _qdrant_initialized = True
     except:
         client.create_collection(
             collection_name=COLLECTION_NAME,
             vectors_config=VectorParams(size=768, distance=Distance.COSINE)
         )
+        _qdrant_initialized = True
 
 def get_neon_connection():
     """Get Neon Postgres connection"""

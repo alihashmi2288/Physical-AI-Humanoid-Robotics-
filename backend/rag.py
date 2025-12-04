@@ -51,6 +51,9 @@ def ingest_document(text: str, metadata: dict):
 
 def search_documents(query: str, limit: int = 3):
     """Search similar documents using RAG"""
+    from database import init_qdrant
+    init_qdrant()
+    
     query_embedding = get_embedding(query)
     
     results = get_qdrant_client().search(
