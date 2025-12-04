@@ -20,14 +20,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Initialize on module load for Vercel
-try:
-    init_qdrant()
-    init_neon()
-    init_auth_tables()
-    genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-except Exception as e:
-    print(f"Initialization warning: {e}")
+# Initialize Gemini on module load
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 @app.get("/")
 async def root():
@@ -36,6 +30,10 @@ async def root():
 @app.post("/api/auth/sign-up/email")
 async def signup(request: SignupRequest):
     """User signup"""
+    try:
+        init_auth_tables()
+    except:
+        pass
     return signup_user(request.email, request.password, request.name)
 
 @app.post("/api/auth/sign-in/email")
@@ -56,6 +54,7 @@ async def ingest(request: IngestRequest):
 async def chat(request: ChatRequest):
     """Main chat endpoint with RAG"""
     try:
+        init_qdrant()
         user_message = request.history[-1].content
         
         # Search relevant documents
