@@ -20,17 +20,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Initialize databases on startup
-@app.on_event("startup")
-async def startup():
+# Initialize on module load for Vercel
+try:
     init_qdrant()
     init_neon()
     init_auth_tables()
     genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+except Exception as e:
+    print(f"Initialization warning: {e}")
 
 @app.get("/")
 async def root():
-    return {"status": "Physical AI RAG Backend Running", "model": "Google Gemini"}
+    return {"status": "Physical AI RAG Backend Running", "model": "Gemini 2.5 Flash"}
 
 @app.post("/api/auth/sign-up/email")
 async def signup(request: SignupRequest):
