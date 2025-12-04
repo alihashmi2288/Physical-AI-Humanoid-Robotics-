@@ -27,8 +27,8 @@ jobs:
       - name: Build Website
         run: npm run build
         env:
-          # If you have environment variables (like API URLs), add them here
-          # Or ensure they are hardcoded in your frontend for the hackathon
+          # REPLACE THIS with your actual Vercel Backend URL
+          REACT_APP_API_URL: https://backend-beta-green.vercel.app
           CI: false # Critical: Prevents the build from failing on warnings
 
       - name: Deploy to GitHub Pages

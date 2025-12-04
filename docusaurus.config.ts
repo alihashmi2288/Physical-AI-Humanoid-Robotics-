@@ -25,7 +25,7 @@ const config: Config = {
 
   // Add custom fields to access environment variables in client-side code
   customFields: {
-    apiUrl: process.env.REACT_APP_API_URL || 'http://localhost:8000',
+    apiUrl: process.env.REACT_APP_API_URL || 'https://backend-beta-green.vercel.app',
   },
 
   // Set the /<baseUrl>/ pathname under which your site is served

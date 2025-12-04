@@ -6,7 +6,7 @@
 export const USE_MOCK_API = false; // Set to true for mock mode without backend
 
 // Backend API URL - Update this after deploying backend to Vercel
-let internalApiUrl = 'http://localhost:8000'; // Local testing
+let internalApiUrl = 'https://backend-beta-green.vercel.app';
 
 export const setApiBaseUrl = (url: string) => {
   if (url) {
