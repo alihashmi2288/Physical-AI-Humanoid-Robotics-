@@ -7,19 +7,26 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Qdrant setup
-qdrant_client = QdrantClient(
-    url=os.getenv("QDRANT_URL"),
-    api_key=os.getenv("QDRANT_API_KEY")
-)
+_qdrant_client = None
 
 COLLECTION_NAME = "physical_ai_docs"
 
+def get_qdrant_client():
+    global _qdrant_client
+    if _qdrant_client is None:
+        _qdrant_client = QdrantClient(
+            url=os.getenv("QDRANT_URL"),
+            api_key=os.getenv("QDRANT_API_KEY")
+        )
+    return _qdrant_client
+
 def init_qdrant():
     """Initialize Qdrant collection if not exists"""
+    client = get_qdrant_client()
     try:
-        qdrant_client.get_collection(COLLECTION_NAME)
+        client.get_collection(COLLECTION_NAME)
     except:
-        qdrant_client.create_collection(
+        client.create_collection(
             collection_name=COLLECTION_NAME,
             vectors_config=VectorParams(size=768, distance=Distance.COSINE)
         )

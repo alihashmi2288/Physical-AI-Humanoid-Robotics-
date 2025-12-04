@@ -1,7 +1,7 @@
 import os
 import google.generativeai as genai
 from qdrant_client.models import PointStruct
-from database import qdrant_client, COLLECTION_NAME, get_neon_connection
+from database import get_qdrant_client, COLLECTION_NAME, get_neon_connection
 from dotenv import load_dotenv
 import uuid
 
@@ -25,7 +25,7 @@ def ingest_document(text: str, metadata: dict):
     
     # Store in Qdrant
     point_id = str(uuid.uuid4())
-    qdrant_client.upsert(
+    get_qdrant_client().upsert(
         collection_name=COLLECTION_NAME,
         points=[
             PointStruct(
@@ -53,7 +53,7 @@ def search_documents(query: str, limit: int = 3):
     """Search similar documents using RAG"""
     query_embedding = get_embedding(query)
     
-    results = qdrant_client.search(
+    results = get_qdrant_client().search(
         collection_name=COLLECTION_NAME,
         query_vector=query_embedding,
         limit=limit
