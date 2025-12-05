@@ -1,4 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { useHistory } from '@docusaurus/router';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import { AuthService, User } from '../services/authService';
 
 interface AuthContextType {
@@ -50,9 +53,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const { siteConfig } = useDocusaurusContext();
+  const history = useHistory();
+  const loginPath = useBaseUrl('/login');
+
   const logout = async () => {
     await AuthService.logout();
     setUser(null);
+    history.push(loginPath);
   };
 
   return (

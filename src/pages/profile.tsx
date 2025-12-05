@@ -3,11 +3,13 @@ import Layout from '@theme/Layout';
 import { PersonalizationContext } from '../contexts/PersonalizationProvider';
 import { useAuth } from '../contexts/AuthContext';
 import { useHistory } from '@docusaurus/router';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 function ProfilePage() {
   const { experienceLevel, setExperienceLevel, language, setLanguage } = useContext(PersonalizationContext);
   const { user, loading, logout } = useAuth();
   const history = useHistory();
+  const loginPath = useBaseUrl('/login');
 
   if (loading) {
     return (
@@ -30,7 +32,7 @@ function ProfilePage() {
           <p>You need to be logged in to view your profile.</p>
           <button
             className="button button--primary button--lg"
-            onClick={() => history.push('/login')}
+            onClick={() => history.push(loginPath)}
           >
             Go to Login
           </button>
@@ -105,7 +107,10 @@ function ProfilePage() {
           </div>
 
           <div className="mt-12 text-right">
-            <button className="button button--danger button--outline" onClick={logout}>
+            <button className="button button--danger button--outline" onClick={async () => {
+              await logout();
+              window.location.href = loginPath;
+            }}>
               Sign Out
             </button>
           </div>
