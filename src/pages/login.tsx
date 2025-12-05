@@ -12,7 +12,7 @@ export default function Login() {
   const [error, setError] = useState('');
   const { login } = useAuth();
   const history = useHistory();
-  const homePath = useBaseUrl('/');
+  const docsPath = useBaseUrl('/docs/module-1/intro-physical-ai-setup');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -21,7 +21,7 @@ export default function Login() {
     setError('');
     try {
       await login(email, password);
-      history.push(homePath);
+      history.push(docsPath);
     } catch (err) {
       setError('Invalid email or password.');
     } finally {

@@ -54,8 +54,19 @@ const FadeIn = ({ children, delay = 0 }: { children: React.ReactNode, delay?: nu
   );
 };
 
+import { Redirect } from '@docusaurus/router';
+import { useAuth } from '../contexts/AuthContext';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
+  const { user } = useAuth();
+  const docsPath = useBaseUrl('/docs/module-1/intro-physical-ai-setup');
+
+  if (user) {
+    return <Redirect to={docsPath} />;
+  }
+
   return (
     <header className="relative overflow-hidden min-h-[90vh] flex items-center justify-center bg-white dark:bg-[#0f172a] pb-24 pt-28">
       {/* Dynamic Background Elements */}

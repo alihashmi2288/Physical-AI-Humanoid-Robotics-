@@ -14,7 +14,7 @@ function ProfilePage() {
       <Layout title="User Profile">
         <div className="container margin-vert--lg">
           <div className="flex justify-center items-center h-64">
-             <div className="text-xl font-bold animate-pulse">Loading Profile...</div>
+            <div className="text-xl font-bold animate-pulse">Loading Profile...</div>
           </div>
         </div>
       </Layout>
@@ -28,7 +28,7 @@ function ProfilePage() {
         <div className="container margin-vert--lg text-center">
           <h1>Please Log In</h1>
           <p>You need to be logged in to view your profile.</p>
-          <button 
+          <button
             className="button button--primary button--lg"
             onClick={() => history.push('/login')}
           >
@@ -43,8 +43,17 @@ function ProfilePage() {
     <Layout title="User Profile">
       <div className="container margin-vert--lg max-w-4xl mx-auto">
         <div className="card shadow--md p-8 bg-white dark:bg-gray-800 rounded-lg">
-          
-          <div className="mb-8">
+
+          <div className="mb-8 relative">
+            <button
+              onClick={() => history.goBack()}
+              className="absolute top-0 right-0 text-gray-500 hover:text-primary transition-colors flex items-center gap-2"
+              aria-label="Go back"
+            >
+              <span className="text-2xl">←</span>
+              <span className="text-sm font-medium">Back</span>
+            </button>
+
             <h1 className="text-3xl font-bold mb-1">{user.name}</h1>
             <p className="text-gray-500 dark:text-gray-400">{user.email}</p>
           </div>
@@ -52,7 +61,7 @@ function ProfilePage() {
           <hr className="my-8 border-gray-200 dark:border-gray-700" />
 
           <h2 className="text-2xl font-bold mb-6 text-primary">Learning Preferences</h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Experience Level */}
             <div className="p-6 border border-gray-200 dark:border-gray-700 rounded-xl hover:shadow-lg transition-shadow">
