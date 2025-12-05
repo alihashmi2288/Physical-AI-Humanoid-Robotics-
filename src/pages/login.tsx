@@ -4,12 +4,15 @@ import Link from '@docusaurus/Link';
 import { useAuth } from '../contexts/AuthContext';
 import { useHistory } from '@docusaurus/router';
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const { login } = useAuth();
   const history = useHistory();
+  const homePath = useBaseUrl('/');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -18,7 +21,7 @@ export default function Login() {
     setError('');
     try {
       await login(email, password);
-      history.push('/');
+      history.push(homePath);
     } catch (err) {
       setError('Invalid email or password.');
     } finally {
@@ -29,7 +32,7 @@ export default function Login() {
   return (
     <Layout title="Login" description="Login to Physical AI">
       <div className="flex items-center justify-center min-h-[80vh] bg-gradient-to-br from-gray-900 to-black relative overflow-hidden">
-        
+
         {/* Abstract Background Shapes */}
         <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-primary/30 rounded-full blur-[100px]" />
         <div className="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-blue-600/30 rounded-full blur-[100px]" />
@@ -49,7 +52,7 @@ export default function Login() {
                 {error}
               </div>
             )}
-            
+
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-1">Email</label>
               <input

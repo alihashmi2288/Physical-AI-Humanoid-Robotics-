@@ -3,14 +3,17 @@ import { useAuth } from '../contexts/AuthContext';
 import { useHistory } from '@docusaurus/router';
 import Layout from '@theme/Layout';
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 export default function Logout() {
   const { logout } = useAuth();
   const history = useHistory();
+  const homePath = useBaseUrl('/');
 
   useEffect(() => {
     const doLogout = async () => {
       await logout();
-      history.push('/');
+      history.push(homePath);
     };
     doLogout();
   }, [logout, history]);
