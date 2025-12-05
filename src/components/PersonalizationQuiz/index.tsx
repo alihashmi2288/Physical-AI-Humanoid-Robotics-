@@ -5,9 +5,12 @@ import clsx from 'clsx';
 
 import { useHistory } from '@docusaurus/router';
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 export default function PersonalizationQuiz() {
   const { user } = useAuth();
   const history = useHistory();
+  const nextPath = useBaseUrl('/docs/module-1/intro-physical-ai-setup');
   const {
     isQuizCompleted,
     completeQuiz,
@@ -36,7 +39,7 @@ export default function PersonalizationQuiz() {
     if (selectedLevel) setExperienceLevel(selectedLevel);
     if (selectedLang) setLanguage(selectedLang);
     completeQuiz();
-    history.push('/docs/module-1/intro-physical-ai-setup');
+    history.push(nextPath);
   };
 
   return (
