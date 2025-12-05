@@ -62,6 +62,7 @@ function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
   const { user } = useAuth();
   const docsPath = useBaseUrl('/docs/module-1/intro-physical-ai-setup');
+  const typewrittenTitle = useTypewriter(siteConfig.title);
 
   if (user) {
     return <Redirect to={docsPath} />;
@@ -85,7 +86,7 @@ function HomepageHeader() {
             </div>
 
             <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400 min-h-[1.2em]">
-              {useTypewriter(siteConfig.title)}
+              {typewrittenTitle}
               <span className="animate-pulse">|</span>
             </h1>
 

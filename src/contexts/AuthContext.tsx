@@ -15,6 +15,10 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
+  const { siteConfig } = useDocusaurusContext();
+  const history = useHistory();
+  const loginPath = useBaseUrl('/login');
+
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -52,10 +56,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setLoading(false);
     }
   };
-
-  const { siteConfig } = useDocusaurusContext();
-  const history = useHistory();
-  const loginPath = useBaseUrl('/login');
 
   const logout = async () => {
     await AuthService.logout();
