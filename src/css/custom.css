@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import './mobile.css';
+
 :root {
   --ifm-color-primary: #4f46e5;
   --ifm-color-primary-dark: #4338ca;
@@ -65,50 +67,50 @@ h6 {
 
 /* Markdown Content Improvements */
 .markdown {
-  @apply max-w-4xl mx-auto px-2;
+  @apply max-w-4xl mx-auto px-4 sm:px-6 lg:px-2;
 }
 
 /* Headings */
 .markdown h1 {
-  @apply text-5xl mt-12 mb-10 leading-tight;
+  @apply text-3xl sm:text-4xl lg:text-5xl mt-8 sm:mt-12 mb-6 sm:mb-10 leading-tight;
 }
 
 .markdown h2 {
-  @apply text-4xl mt-16 mb-8 border-b border-gray-200 dark:border-gray-800 pb-4;
+  @apply text-2xl sm:text-3xl lg:text-4xl mt-10 sm:mt-16 mb-6 sm:mb-8 border-b border-gray-200 dark:border-gray-800 pb-3 sm:pb-4;
 }
 
 .markdown h3 {
-  @apply text-3xl mt-10 mb-6;
+  @apply text-xl sm:text-2xl lg:text-3xl mt-8 sm:mt-10 mb-4 sm:mb-6;
 }
 
 .markdown h4 {
-  @apply text-2xl mt-8 mb-4;
+  @apply text-lg sm:text-xl lg:text-2xl mt-6 sm:mt-8 mb-3 sm:mb-4;
 }
 
 .markdown h5 {
-  @apply text-xl mt-6 mb-3;
+  @apply text-base sm:text-lg lg:text-xl mt-5 sm:mt-6 mb-2 sm:mb-3;
 }
 
 .markdown h6 {
-  @apply text-lg mt-6 mb-3 uppercase tracking-wide text-gray-500;
+  @apply text-sm sm:text-base lg:text-lg mt-5 sm:mt-6 mb-2 sm:mb-3 uppercase tracking-wide text-gray-500;
 }
 
 /* Text */
 .markdown p {
-  @apply mb-8 text-lg text-gray-700 dark:text-gray-300 leading-8;
+  @apply mb-6 sm:mb-8 text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-7 sm:leading-8;
 }
 
 /* Lists */
 .markdown ul {
-  @apply mb-8 pl-6 list-disc marker:text-primary;
+  @apply mb-6 sm:mb-8 pl-5 sm:pl-6 list-disc marker:text-primary;
 }
 
 .markdown ol {
-  @apply mb-8 pl-6 list-decimal marker:text-primary marker:font-bold;
+  @apply mb-6 sm:mb-8 pl-5 sm:pl-6 list-decimal marker:text-primary marker:font-bold;
 }
 
 .markdown li {
-  @apply mb-3 text-lg text-gray-700 dark:text-gray-300 pl-2 leading-relaxed;
+  @apply mb-2 sm:mb-3 text-base sm:text-lg text-gray-700 dark:text-gray-300 pl-1 sm:pl-2 leading-relaxed;
 }
 
 .markdown li>ul,
@@ -118,7 +120,7 @@ h6 {
 
 /* Code Blocks */
 .markdown pre {
-  @apply my-10 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700/50 bg-gray-50 dark:bg-[#1e293b];
+  @apply my-6 sm:my-10 rounded-xl sm:rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700/50 bg-gray-50 dark:bg-[#1e293b] overflow-x-auto;
 }
 
 /* Inline Code */
@@ -129,7 +131,7 @@ h6 {
 
 /* Blockquotes */
 .markdown blockquote {
-  @apply my-10 pl-6 py-4 border-l-4 border-primary bg-blue-50/50 dark:bg-blue-900/10 rounded-r-xl italic text-gray-700 dark:text-gray-300 leading-relaxed;
+  @apply my-6 sm:my-10 pl-4 sm:pl-6 py-3 sm:py-4 border-l-4 border-primary bg-blue-50/50 dark:bg-blue-900/10 rounded-r-xl italic text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed;
 }
 
 /* Dividers */
@@ -139,21 +141,26 @@ h6 {
 
 /* Tables */
 .markdown table {
-  @apply my-10 w-full border-collapse rounded-xl overflow-hidden shadow-sm;
+  @apply my-6 sm:my-10 w-full border-collapse rounded-xl overflow-hidden shadow-sm text-sm sm:text-base;
 }
 
 .markdown th,
 .markdown td {
-  @apply p-4 border-b border-gray-200 dark:border-gray-800;
+  @apply p-2 sm:p-4 border-b border-gray-200 dark:border-gray-800;
 }
 
 .markdown th {
   @apply bg-gray-50 dark:bg-gray-800 font-bold text-left text-gray-900 dark:text-white;
 }
 
+/* Table Wrapper for Horizontal Scroll */
+.markdown > table {
+  @apply block overflow-x-auto;
+}
+
 /* Images */
 .markdown img {
-  @apply my-10 rounded-2xl shadow-xl transition-transform duration-300 hover:scale-[1.01];
+  @apply my-6 sm:my-10 rounded-xl sm:rounded-2xl shadow-xl transition-transform duration-300 hover:scale-[1.01] max-w-full h-auto;
 }
 
 /* Links */
@@ -182,7 +189,8 @@ h6 {
 
 /* Navbar Glassmorphism */
 .navbar {
-  @apply backdrop-blur-md bg-white/80 dark:bg-[#0f172a]/80 border-b border-slate-200/50 dark:border-slate-700/50 sticky top-0 z-50 transition-all duration-300;
+  @apply backdrop-blur-md bg-white/80 dark:bg-[#0f172a]/80 border-b border-slate-200/50 dark:border-slate-700/50 sticky top-0 transition-all duration-300;
+  z-index: var(--ifm-z-index-fixed) !important;
 }
 
 .navbar__title {
@@ -193,6 +201,46 @@ h6 {
 /* Sidebar Styling - "The Max" */
 .theme-doc-sidebar-menu {
   @apply px-4 py-6 font-medium tracking-wide;
+}
+
+/* Mobile Sidebar Fix */
+@media (max-width: 996px) {
+  .theme-doc-sidebar-container {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100vh !important;
+    z-index: calc(var(--ifm-z-index-fixed) + 1) !important;
+    background: var(--ifm-background-color) !important;
+    overflow-y: auto !important;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .theme-doc-sidebar-container[data-hidden="false"] {
+    transform: translateX(0) !important;
+  }
+
+  .navbar-sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100vh !important;
+    z-index: calc(var(--ifm-z-index-fixed) + 1) !important;
+    background: var(--ifm-background-color) !important;
+  }
+
+  .navbar-sidebar__backdrop {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: var(--ifm-z-index-fixed) !important;
+    background: rgba(0, 0, 0, 0.5) !important;
+  }
 }
 
 .menu__link {
@@ -275,7 +323,7 @@ h6 {
 
 /* Footer Icons Alignment */
 .footer__links {
-  @apply flex justify-center gap-8 mb-0 !important;
+  @apply flex justify-center gap-4 sm:gap-8 mb-0 !important;
 }
 
 .footer__col {
@@ -283,10 +331,167 @@ h6 {
 }
 
 .footer__item {
-  @apply inline-block mx-4 !important;
+  @apply inline-block mx-2 sm:mx-4 !important;
 }
 
 .footer__title {
   @apply hidden;
   /* Hide the "Connect" title for a cleaner look */
+}
+
+/* ============================================
+   MOBILE RESPONSIVE FIXES
+   ============================================ */
+
+/* Ensure proper mobile viewport */
+@media (max-width: 996px) {
+  /* Fix content padding on mobile */
+  .main-wrapper {
+    @apply px-0;
+  }
+
+  /* Ensure doc content is readable on mobile */
+  .theme-doc-markdown {
+    @apply px-4;
+  }
+
+  /* Fix navbar items on mobile */
+  .navbar__items {
+    @apply gap-2;
+  }
+
+  .navbar__item {
+    @apply text-sm;
+  }
+
+  /* Improve button sizing on mobile */
+  .button {
+    @apply text-sm px-4 py-2;
+  }
+
+  /* Fix sidebar menu spacing */
+  .theme-doc-sidebar-menu {
+    @apply px-3 py-4;
+  }
+
+  .menu__link {
+    @apply px-3 py-2 text-sm;
+  }
+
+  /* Ensure mermaid diagrams are responsive */
+  .docusaurus-mermaid-container svg {
+    @apply p-4;
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Fix code block overflow */
+  .markdown pre code {
+    @apply text-xs;
+  }
+
+  /* Improve touch targets */
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+    @apply inline-flex items-center justify-center;
+  }
+
+  /* Fix navbar title on small screens */
+  .navbar__title {
+    @apply text-base sm:text-xl;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 576px) {
+  .markdown h1 {
+    @apply text-2xl;
+  }
+
+  .markdown h2 {
+    @apply text-xl;
+  }
+
+  .markdown h3 {
+    @apply text-lg;
+  }
+
+  /* Reduce padding on very small screens */
+  .theme-doc-markdown {
+    @apply px-3;
+  }
+}
+
+/* ============================================
+   PERFORMANCE OPTIMIZATIONS
+   ============================================ */
+
+/* Enable GPU acceleration for animations */
+.animate-fade-in,
+.menu__link,
+.button,
+.navbar {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Optimize images */
+img {
+  @apply max-w-full h-auto;
+  content-visibility: auto;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Improve font rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Optimize scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Prevent layout shift */
+.navbar,
+.theme-doc-sidebar-container {
+  contain: layout style;
+}
+
+/* ============================================
+   ACCESSIBILITY IMPROVEMENTS
+   ============================================ */
+
+/* Focus visible styles */
+*:focus-visible {
+  @apply outline-2 outline-offset-2 outline-primary;
+}
+
+/* Skip to content link */
+.skip-to-content {
+  @apply absolute -top-full left-0 bg-primary text-white px-4 py-2 z-[9999] transition-all;
+}
+
+.skip-to-content:focus {
+  @apply top-0;
 }

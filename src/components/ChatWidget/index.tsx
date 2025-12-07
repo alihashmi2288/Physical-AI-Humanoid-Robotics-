@@ -86,12 +86,12 @@ export default function ChatWidget() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[90] flex flex-col items-end">
 
       {/* Chat Window */}
       <div className={clsx(
-        "bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow-2xl rounded-2xl w-80 sm:w-96 flex flex-col transition-all duration-300 origin-bottom-right overflow-hidden mb-4 max-h-[80vh]",
-        isOpen ? "scale-100 opacity-100 h-[600px]" : "scale-0 opacity-0 h-0"
+        "bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow-2xl rounded-2xl w-[calc(100vw-2rem)] sm:w-80 md:w-96 flex flex-col transition-all duration-300 origin-bottom-right overflow-hidden mb-4 max-h-[70vh] sm:max-h-[80vh]",
+        isOpen ? "scale-100 opacity-100 h-[500px] sm:h-[600px]" : "scale-0 opacity-0 h-0"
       )}>
 
         {/* Header */}
